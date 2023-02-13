@@ -15,7 +15,7 @@ function NewQuote() {
         }}
       >
         <textarea id='new_quote_input' placeholder='Share your thoughts...' />
-        <input id='new_quote_share' role='button' type='submit' value='Share' />
+        <input id='new_quote_share' type='submit' value='Share' />
       </form>
     </div>
   );
