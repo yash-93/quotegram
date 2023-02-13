@@ -17,6 +17,9 @@ function Navbar() {
           <Link to={'/dashboard'} className='link'>
             <li className='navbar_ul__item'>Dashboard</li>
           </Link>
+          <Link to={'/new-quote'} className='link'>
+            <li className='navbar_ul__item'>New Quote</li>
+          </Link>
         </ul>
       </div>
       <FiLogOut size={25} id='navbar_item_logout' />

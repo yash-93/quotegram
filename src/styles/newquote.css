@@ -1,0 +1,74 @@
+.new_quote_container {
+  width: 70vw;
+  max-width: 70vw;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  margin: 2rem 1rem;
+}
+
+.new_quote_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+#new_quote_header_heading {
+  margin-left: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: x-large;
+}
+
+#new_quote_form {
+  margin: 1.5rem 0;
+}
+
+#new_quote_input {
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #ccc;
+  background-color: #F2F5FA;
+  resize: none;
+  height: 150px;
+  font-size: 16px;
+  font-family: 'Comic Neue', cursive;
+}
+
+#new_quote_share {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  outline: none;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  width: fit-content;
+  float: right;
+  margin: 1rem 0 0.5rem 0;
+}
+
+#new_quote_share:disabled {
+  pointer-events: none;
+}
+
+#new_quote_share:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+#new_quote_share:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
