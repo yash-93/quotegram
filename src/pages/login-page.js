@@ -1,11 +1,14 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
+import { auth } from '../firebase';
 
 import Navbar from '../components/navbar';
-import Login from '../components/login';
+import LogIn from '../components/login';
 import SignUp from '../components/signup';
 import '../styles/dashboard.css';
 
 function LogInPage() {
+  const [showSignUpForm, setShowSignUpForm] = useState(false);
   return (
     <div
       className='dashboard_container'
@@ -16,8 +19,17 @@ function LogInPage() {
       }}
     >
       <Navbar />
-      <Login />
-      <SignUp />
+      {
+        auth.currentUser ?
+          <div>User already signed in</div> :
+          <>
+            {
+              showSignUpForm ?
+                <SignUp setShowSignUpForm={setShowSignUpForm} /> :
+                <LogIn setShowSignUpForm={setShowSignUpForm} />
+            }
+          </>
+      }
     </div>
   );
 }
