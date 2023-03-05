@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
-import { signOut } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
 
-import { auth } from '../firebase';
+import { signout } from '../store/slice/authSlice';
 
 import '../styles/navbar.css';
 
 function Navbar() {
+  const dispatch = useDispatch();
+
   return (
     <nav className='navbar_container'>
       <div id='navbar_logo'>
@@ -28,9 +30,7 @@ function Navbar() {
       </div>
       <div
         onClick={() => {
-          signOut(auth)
-            .then(() => console.log('logged out'))
-            .catch(err => console.log(err))
+          dispatch(signout());
         }}
       >
         <FiLogOut size={25} id='navbar_item_logout' />

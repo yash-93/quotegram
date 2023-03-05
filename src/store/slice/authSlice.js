@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setDoc, doc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
+
 import { signInUser, createNewUser } from '../../auth';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 
 const initialState = {
   email: null,
@@ -65,6 +67,21 @@ export const signup = (values) =>
       .catch(err => {
         console.log('Unable to create account: ', err);
       })
+  }
+
+export const signout = (values) =>
+  async (dispatch) => {
+    signOut(auth)
+      .then(() => {
+        console.log('Logged out');
+        dispatch(
+          setLogin({
+            email: null,
+            username: null
+          })
+        )
+      })
+      .catch(err => console.log(err))
   }
 
 export default authSlice.reducer;
