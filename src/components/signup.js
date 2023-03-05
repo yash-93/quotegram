@@ -7,7 +7,6 @@ import '../styles/signup.css';
 
 const initialValues = {
   email: '',
-  username: '',
   password: ''
 };
 
@@ -52,13 +51,12 @@ function Signup({ setShowSignUpForm }) {
         <input
           type='text'
           className='signup_input'
-          name='username'
-          placeholder='Enter your username'
+          placeholder='Username'
           style={{
             marginTop: '1rem'
           }}
-          value={values.username || ''}
-          onChange={handleInput}
+          value={values.email.indexOf('@') !== -1 ? values.email.substring(0, values.email.indexOf('@')) || '' : values.email}
+          disabled
         />
         <input
           type='password'
