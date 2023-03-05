@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import { setDoc, doc } from 'firebase/firestore';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
 
-import { createNewUser } from '../auth';
-import { db } from '../firebase';
-import { toastOptions } from '../util';
+import { signup } from '../store/slice/authSlice';
 
 import '../styles/signup.css';
 
@@ -17,6 +13,7 @@ const initialValues = {
 
 function Signup({ setShowSignUpForm }) {
   const [values, setValues] = useState(initialValues);
+  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     setValues({
@@ -27,23 +24,11 @@ function Signup({ setShowSignUpForm }) {
 
   const handleCreateUser = (e) => {
     e.preventDefault();
-    createNewUser(values.email, values.password)
-      .then(async () => {
-        try {
-          await setDoc(doc(db, `${process.env.REACT_APP_USER_COLLECTION_NAME}`, values.email), {
-            email: values.email,
-            username: values.username
-          }, { merge: true });
-          toast.success('Profile created.', { ...toastOptions });
-        } catch (err) {
-          console.log('Account created. Error while creating profile: ', err);
-          toast.error('Account created. Error while creating profile: ', { ...toastOptions });
-        }
-      })
-      .catch(err => {
-        console.log('Unable to create account: ', err);
-        toast.error(`Unable to create account: ${err}`, { ...toastOptions });
-      })
+    dispatch(signup({
+      email: values.email,
+      password: values.password,
+      username: values.email.substring(0, values.email.indexOf('@'))
+    }));
   }
 
   return (
@@ -97,7 +82,6 @@ function Signup({ setShowSignUpForm }) {
           <input id='signup_button' type='submit' value='Sign up' />
         </div>
       </form>
-      <ToastContainer />
     </div>
   );
 }

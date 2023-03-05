@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
 
-import { signInUser } from '../auth';
+import { login } from '../store/slice/authSlice';
 
 import '../styles/login.css';
-import { toastOptions } from '../util';
 
 const initialValues = {
   email: '',
@@ -14,6 +12,7 @@ const initialValues = {
 
 function LogIn({ setShowSignUpForm }) {
   const [values, setValues] = useState(initialValues);
+  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     setValues({
@@ -32,15 +31,11 @@ function LogIn({ setShowSignUpForm }) {
         id='login_form'
         onSubmit={(e) => {
           e.preventDefault();
-          signInUser(values.email, values.password)
-            .then(() => {
-              console.log('Sign in successful.');
-              toast.success('Sign in successful', { ...toastOptions });
-            })
-            .catch(err => {
-              console.log('Sign in failed: ', err);
-              toast.error(`Sign in failed: ${err}`, { ...toastOptions });
-            })
+          dispatch(login({
+            email: values.email,
+            password: values.password,
+            username: values.email.substring(0, values.email.indexOf('@'))
+          }));
         }}
       >
         <input
@@ -71,7 +66,6 @@ function LogIn({ setShowSignUpForm }) {
           <input id='login_button' type='submit' value='Log in' />
         </div>
       </form>
-      <ToastContainer />
     </div>
   );
 }
