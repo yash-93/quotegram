@@ -20,7 +20,7 @@ function Navbar() {
         </Link>
       </div>
       {
-        authData.email && (
+        authData.isAuthenticated && (
           <>
             <div>
               <ul id='navbar_ul__items'>

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 
 import { db } from '../../firebase';
+import { store } from '../index';
 
 const initialState = {
   quotes: []
@@ -12,7 +13,7 @@ export const quotesSlice = createSlice({
   initialState,
   reducers: {
     addQuote: (state, action) => {
-      state.quotes.push(...action.payload.quote)
+      state.quotes = action.payload.quote
     },
   },
 })
@@ -29,16 +30,16 @@ export const createQuote = (values) =>
         timestamp: timestamp
       });
       console.log('Quote created.');
+      let payload = store.getState().quotes.quotes || [];
+      payload = [...payload, {
+        quote: values.quote,
+        userId: values.userId,
+        timestamp: timestamp,
+        id: docRef.id
+      }]
       dispatch(
         addQuote({
-          quote: [
-            {
-              quote: values.quote,
-              userId: values.userId,
-              timestamp: timestamp,
-              id: docRef.id
-            }
-          ]
+          quote: payload
         })
       )
     } catch (err) {

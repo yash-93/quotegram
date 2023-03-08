@@ -7,7 +7,8 @@ import { db, auth } from '../../firebase';
 
 const initialState = {
   email: null,
-  username: null
+  username: null,
+  isAuthenticated: false
 }
 
 export const authSlice = createSlice({
@@ -17,10 +18,12 @@ export const authSlice = createSlice({
     setLogin: (state, action) => {
       state.email = action.payload.email
       state.username = action.payload.username
+      state.isAuthenticated = action.payload.isAuthenticated
     },
     setLogout: (state) => {
       state.email = null
       state.username = null
+      state.isAuthenticated = false
     },
   },
 })
@@ -35,7 +38,8 @@ export const login = (values) =>
         dispatch(
           setLogin({
             email: values.email,
-            username: values.username
+            username: values.username,
+            isAuthenticated: true
           })
         )
       })
@@ -60,7 +64,8 @@ export const signup = (values) =>
           dispatch(
             setLogin({
               email: values.email,
-              username: values.username
+              username: values.username,
+              isAuthenticated: true
             })
           )
         } catch (err) {
@@ -80,7 +85,8 @@ export const signout = (values) =>
         dispatch(
           setLogin({
             email: null,
-            username: null
+            username: null,
+            isAuthenticated: false
           })
         )
       })

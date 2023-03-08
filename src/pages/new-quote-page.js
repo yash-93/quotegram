@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -12,9 +12,9 @@ function NewQuotePage() {
 
   return (
     <>
-      {authData.email == null && (
-        <Navigate to='/' replace={true} />
-      )}
+      {
+        !authData.isAuthenticated && <Navigate to='/' replace={true} />
+      }
       <div
         className='dashboard_container'
         style={{

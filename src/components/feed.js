@@ -10,11 +10,11 @@ function Feed() {
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllQuotes());
-  }, []);
+  }, [dispatch]);
   return (
     <div className='feed_parent_container'>
       {
-        quotes.quotes?.map((item, index) => <Post key={index} username={item.username} quote={item.quote} likes={item.likes} />)
+        quotes?.quotes?.map((item, index) => <Post key={index} username={item.username} quote={item.quote} likes={item.likes} />)
       }
     </div>
   );
