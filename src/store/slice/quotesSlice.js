@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 
 import { db } from '../../firebase';
 
@@ -12,7 +12,7 @@ export const quotesSlice = createSlice({
   initialState,
   reducers: {
     addQuote: (state, action) => {
-      state.quotes.push(action.payload.quote)
+      state.quotes.push(...action.payload.quote)
     },
   },
 })
@@ -31,16 +31,42 @@ export const createQuote = (values) =>
       console.log('Quote created.');
       dispatch(
         addQuote({
-          quote: {
-            quote: values.quote,
-            userId: values.userId,
-            timestamp: timestamp,
-            id: docRef.id
-          }
+          quote: [
+            {
+              quote: values.quote,
+              userId: values.userId,
+              timestamp: timestamp,
+              id: docRef.id
+            }
+          ]
         })
       )
     } catch (err) {
       console.log('Error while creating quote: ', err);
+    }
+  }
+
+export const getAllQuotes = (values) =>
+  async (dispatch) => {
+    try {
+      const allQuotes = await getDocs(collection(db, `${process.env.REACT_APP_QUOTE_COLLECTION_NAME}`));
+      let payload = [];
+      allQuotes.forEach((quote) => {
+        const quoteData = quote.data();
+        payload.push({
+          quote: quoteData.quote,
+          userId: quoteData.userId,
+          timestamp: quoteData.timestamp,
+          id: quote.id
+        });
+      })
+      dispatch(
+        addQuote({
+          quote: payload
+        })
+      )
+    } catch (err) {
+      console.log('Error while fetching all quotes: ', err);
     }
   }
 
