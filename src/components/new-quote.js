@@ -24,7 +24,7 @@ function NewQuote() {
           e.preventDefault();
           dispatch(createQuote({
             quote: quote,
-            sharedBy: authData.email
+            userId: authData.email
           }));
         }}
       >

@@ -21,21 +21,20 @@ export const { addQuote } = quotesSlice.actions;
 
 export const createQuote = (values) =>
   async (dispatch) => {
+    const timestamp = Date.now().toString();
     try {
       const docRef = await addDoc(collection(db, 'quotes'), {
         quote: values.quote,
-        sharedBy: values.sharedBy,
-        likes: 0,
-        likedByMe: false
+        userId: values.userId,
+        timestamp: timestamp
       });
       console.log('Quote created.');
       dispatch(
         addQuote({
           quote: {
             quote: values.quote,
-            sharedBy: values.sharedBy,
-            likes: 0,
-            likedByMe: false,
+            userId: values.userId,
+            timestamp: timestamp,
             id: docRef.id
           }
         })

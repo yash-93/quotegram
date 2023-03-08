@@ -46,12 +46,15 @@ export const login = (values) =>
 
 export const signup = (values) =>
   async (dispatch) => {
+    const timestamp = Date.now().toString();
     createNewUser(values.email, values.password)
       .then(async () => {
         try {
           await setDoc(doc(db, `${process.env.REACT_APP_USER_COLLECTION_NAME}`, values.email), {
             email: values.email,
-            username: values.username
+            username: values.username,
+            imgUrl: '',
+            createTimestamp: timestamp
           }, { merge: true });
           console.log('Account created.');
           dispatch(
