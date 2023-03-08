@@ -1,0 +1,35 @@
+.feed_post_container {
+  width: fit-content;
+  max-width: 45vw;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  margin: 1rem 1rem;
+}
+
+.feed_post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+#feed_post_header_profile_pic {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+}
+
+#feed_post_header_username {
+  margin-left: 0.5rem;
+  font-family: 'Comfortaa', cursive;
+}
+
+#feed_post_quote {
+  font-family: 'Comic Neue', cursive;
+}
+
+#feed_post_likes {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+}
