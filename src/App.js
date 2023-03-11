@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { AuthContext } from './context/auth-context';
+import { QuotesContext } from './context/quotes-context';
 import LogInPage from './pages/login-page';
 import ErrorPage from './pages/error-page';
 import DashboardPage from './pages/dashboard-page';
@@ -55,9 +56,15 @@ function App() {
         logout
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <QuotesContext.Provider
+        value={{
+          quotes: []
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </QuotesContext.Provider>
     </AuthContext.Provider>
   )
 }
