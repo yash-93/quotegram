@@ -1,9 +1,9 @@
 .feed_post_container {
-  width: fit-content;
-  max-width: 45vw;
+  width: 80%;
+  max-width: 100%;
   border-radius: 0.5rem;
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #F2F5FA;
   margin: 1rem 1rem;
 }
 
@@ -27,6 +27,7 @@
 
 #feed_post_quote {
   font-family: 'Comic Neue', cursive;
+  word-wrap: break-word;
 }
 
 #feed_post_likes {

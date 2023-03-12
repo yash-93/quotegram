@@ -26,9 +26,11 @@ function Feed() {
   if (isLoading) return <div>Loading...</div>
   return (
     <div className='feed_parent_container'>
-      {
-        quotesContext.quotes.map((item, index) => <Post key={index} username={item.username} quote={item.quote} likes={item.likes} />)
-      }
+      <div className='quotes_parent_container'>
+        {
+          quotesContext.quotes.map((item, index) => <Post key={index} username={item.username} quote={item.quote} likes={item.likes} />)
+        }
+      </div>
     </div>
   );
 }

@@ -2,7 +2,19 @@
   width: 100vw;
   max-width: 100vw;
   padding: 1rem;
-  flex-basis: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.quotes_parent_container {
+  width: 60vw;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
